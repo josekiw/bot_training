@@ -74,7 +74,7 @@ module.exports.fetchNetworks = function (cb) {
             var current = events[i];
             //msg += "\n:small_blue_diamond: "
             msg += "\n" + (i+1) + ". ";
-            msg += current.model + " - " + current.mac + " - " + current.serial;
+            msg += current.name + " - " + current.type + " - " + current.timeZone;
         }
 
         cb(null, events, msg);
