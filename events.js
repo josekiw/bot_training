@@ -161,28 +161,28 @@ module.exports.fetchDevices = function (cb) {
             return;
         }
 
-        var events = JSON.parse(body);
-        debug("fetched " + events.length + " networks");
-        fine(JSON.stringify(events));
+        var devices = JSON.parse(body);
+        debug("fetched " + devices.length + " networks");
+        fine(JSON.stringify(devices));
 
-        if (events.length == 0) {
-            cb(null, events, "Sorry, no devices on your Meraki Network");
+        if (devices.length == 0) {
+            cb(null, devices, "Sorry, no devices on your Meraki Network");
             return;
         }
 
-        var nb = events.length;
+        var nb = devices.length;
         var msg = "**" + nb + " Devices claimed on your Meraki Network:**";
         if (nb == 1) {
             msg = "**only one device is claimed now:**";
         }
         for (var i = 0; i < nb; i++) {
-            var current = events[i];
+            var current = devices[i];
             //msg += "\n:small_blue_diamond: "
             msg += "\n" + (i+1) + ". ";
             msg += current.model + " - " + current.mac + " - " + current.serial;
         }
 
-        cb(null, events, msg);
+        cb(null, devices, msg);
     });
 }
 
