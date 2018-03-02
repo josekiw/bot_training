@@ -35,11 +35,11 @@ module.exports.fetchNext = function (limit, cb) {
 
     // Get list of upcoming events - NEXT
     var options = {
-        method: 'GET',
-        url: "https://dashboard.meraki.com/api/v0/organizations",
+        method: 'POST',
+        url: "https://dashboard.meraki.com/api/v0/networks/595038100766326800/devices/claim",
         headers: {
             "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
-            "content-type": "application/json"
+            "serial": "Q2FD-TUKH-CR8V"
         }
     };
 
@@ -84,10 +84,10 @@ module.exports.fetchNext = function (limit, cb) {
 
 module.exports.fetchCurrent = function (cb) {
 
-    // Get list of upcoming events - NOW
+    // Get list of devices in a Network
     var options = {
         method: 'GET',
-        url: "https://dashboard.meraki.com/api/v0/organizations",
+        url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices",
         headers: {
             "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
             "content-type": "application/json"
@@ -113,12 +113,12 @@ module.exports.fetchCurrent = function (cb) {
         fine(JSON.stringify(events));
 
         if (events.length == 0) {
-            cb(null, events, "**Found no networks currently on your Meraki ORG**");
+            cb(null, events, "**Found no Devices currently on your Meraki Network**");
             return;
         }
 
         var nb = events.length;
-        var msg = "**" + nb + " Networks are on your Meraki ORG:**";
+        var msg = "**" + nb + " Devices claimed on your Meraki Network:**";
         if (nb == 1) {
             msg = "**only one event is running now:**";
         }
@@ -126,7 +126,7 @@ module.exports.fetchCurrent = function (cb) {
             var current = events[i];
             //msg += "\n:small_blue_diamond: "
             msg += "\n" + (i+1) + ". ";
-            msg += current.id + " - " + current.name;
+            msg += current.model + " - " + current.mac + " - " + current.serial;
         }
 
         cb(null, events, msg);

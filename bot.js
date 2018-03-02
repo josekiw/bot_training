@@ -51,7 +51,7 @@ var Events = require("./events.js");
 //
 // Command: now
 //
-controller.hears(['networks', 'net'], 'direct_message,direct_mention', function (bot, message) {
+controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (bot, message) {
 
     bot.reply(message, "Let's check what's on your Meraki ORG...");
 
