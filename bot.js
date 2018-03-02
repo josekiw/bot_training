@@ -47,6 +47,7 @@ controller.setupWebserver(process.env.PORT || 3000, function(err, webserver) {
 // event API wrapper that preformats messages to send back to Slack
 var Networks = require("./networks.js");
 var Devices = require("./devices.js")
+var Claim = require("./claim.js")
 
 //
 // Command: Networks
