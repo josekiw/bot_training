@@ -126,7 +126,7 @@ module.exports.fetchCurrent = function (cb) {
             var current = events[i];
             //msg += "\n:small_blue_diamond: "
             msg += "\n" + (i+1) + ". ";
-            msg += current.date + " - " + current.network + ": [" + current.IPsrc + "](" + current.IPdst + "), " + current.Pdst + " (" + current.url + ")";
+            msg += current.id + " - " + current.name;
         }
 
         cb(null, events, msg);
