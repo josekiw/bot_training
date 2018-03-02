@@ -5,7 +5,7 @@ var fine = require("debug")("samples:fine");
 var request = require("request");
 
 
-module.exports.fetchNetworks = function (cb) {
+module.exports.fetchDevices = function (cb) {
 
     // List Networks
     var options = {
