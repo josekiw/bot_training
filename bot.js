@@ -86,7 +86,7 @@ controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (
     if (!limit) limit = 5;
     if (limit < 1) limit = 1;
 
-    Devices.fetchDevices(limit, function (err, devices, text) {
+    Devices.fetchDevices(function (err, devices, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
@@ -117,7 +117,7 @@ controller.hears(['claim'], 'direct_message,direct_mention', function (bot, mess
     if (!limit) limit = 5;
     if (limit < 1) limit = 1;
 
-    Claim.fetchClaim(limit, function (err, claim, text) {
+    Claim.fetchClaim(function (err, claim, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
