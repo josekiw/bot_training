@@ -31,7 +31,7 @@ var fine = require("debug")("samples:fine");
 var request = require("request");
 
 
-module.exports.fetchNetwork = function (limit, cb) {
+module.exports.fetchNetwork = function (cb) {
 
     // List Networks
     var options = {
@@ -84,7 +84,7 @@ module.exports.fetchNetwork = function (limit, cb) {
     });
 }
 
-module.exports.fetchClaim = function (limit, cb) {
+module.exports.fetchClaim = function (cb) {
 
     // POST - Claim new device
     var options = {
