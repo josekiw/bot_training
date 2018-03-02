@@ -36,7 +36,7 @@ module.exports.fetchNext = function (limit, cb) {
     // Get list of upcoming events
     var options = {
         method: 'GET',
-        url: "https://devnet-events-api.herokuapp.com/api/v1/events/next?limit=" + limit
+        url: "http://api.cepsa.kiw.one/navigation"
     };
 
     request(options, function (error, response, body) {
@@ -83,7 +83,7 @@ module.exports.fetchCurrent = function (cb) {
     // Get list of upcoming events
     var options = {
         method: 'GET',
-        url: "https://devnet-events-api.herokuapp.com/api/v1/events/current"
+        url: "http://api.cepsa.kiw.one/navigation"
     };
 
     request(options, function (error, response, body) {
