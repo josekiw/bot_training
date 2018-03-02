@@ -108,15 +108,11 @@ controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (
 });
 
 //
-// Command: claim
+// Command: Claim
 //
 controller.hears(['claim'], 'direct_message,direct_mention', function (bot, message) {
 
-    bot.reply(message, "Let's claim a new device to your Meraki Network...");
-
-    var limit = parseInt(message.match[1]);
-    if (!limit) limit = 5;
-    if (limit < 1) limit = 1;
+    bot.reply(message, "Let's claim a SN on your Meraki ORG...");
 
     Claim.fetchClaim(function (err, claim, text) {
         if (err) {
@@ -124,18 +120,17 @@ controller.hears(['claim'], 'direct_message,direct_mention', function (bot, mess
             return;
         }
 
-        // Store events
-        var toPersist = { "id": message.user, "events": claim };
-        controller.storage.users.save(toPersist, function (err, id) {
-            if (err != null) {
-                bot.reply(message, text);
-                return;
-            }
+        if (claim.length == 0) {
+            bot.reply(message, text + "\n\nType next for more...");
+            return;
+        }
 
-            bot.reply(message, text + "\n\n_Done_");
+        // Store networks
+        var toPersist = { "id": message.user, "claimed": claim };
+        controller.storage.users.save(toPersist, function (err, id) {
+            bot.reply(message, text + "\n\nType about [number] for more details");
         });
     });
-
 });
 
 
