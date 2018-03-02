@@ -35,24 +35,24 @@ module.exports.fetchNext = function (limit, cb) {
 
     // Get list of upcoming events - NEXT
     var options = {
-        method: 'POST',
-        url: "https://dashboard.meraki.com/api/v0/networks/595038100766326800/devices/claim",
+        method: 'GET',
+        url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices",
         headers: {
             "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
-            "serial": "Q2FD-TUKH-CR8V"
+            "content-type": "application/json"
         }
     };
 
     request(options, function (error, response, body) {
         if (error) {
-            debug("could not retreive list of events, error: " + error);
-            cb(new Error("Could not retreive upcoming events, sorry [Events API not responding]"), null, null);
+            debug("could not retreive list of devices, error: " + error);
+            cb(new Error("Could not retreive current devices, sorry [MEraki API not responding]"), null, null);
             return;
         }
 
         if ((response < 200) || (response > 299)) {
-            console.log("could not retreive list of events, response: " + response);
-            sparkCallback(new Error("Could not retreive upcoming events, sorry [bad anwser from Events API]"), null, null);
+            console.log("could not retreive list of devices, response: " + response);
+            sparkCallback(new Error("Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
             return;
         }
 
@@ -66,15 +66,15 @@ module.exports.fetchNext = function (limit, cb) {
         }
 
         var nb = events.length;
-        var msg = "**" + nb + " upcoming events:**\n";
+        var msg = "**" + nb + " Devices claimed on your Meraki Network:**";
         if (nb == 1) {
-            msg = "**only one upcoming event:**\n";
+            msg = "**only one device is claimed now:**";
         }
         for (var i = 0; i < nb; i++) {
             var current = events[i];
             //msg += "\n:small_blue_diamond: "
             msg += "\n" + (i+1) + ". ";
-            msg += current.date + " - " + current.network + ": [" + current.IPsrc + "](" + current.IPdst + "), " + current.Pdst + " (" + current.url + ")";
+            msg += current.model + " - " + current.mac + " - " + current.serial;
         }
 
         cb(null, events, msg);
@@ -120,7 +120,7 @@ module.exports.fetchCurrent = function (cb) {
         var nb = events.length;
         var msg = "**" + nb + " Devices claimed on your Meraki Network:**";
         if (nb == 1) {
-            msg = "**only one event is running now:**";
+            msg = "**only one device is claimed now:**";
         }
         for (var i = 0; i < nb; i++) {
             var current = events[i];

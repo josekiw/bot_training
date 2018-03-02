@@ -51,7 +51,7 @@ var Events = require("./events.js");
 //
 // Command: now
 //
-controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (bot, message) {
+controller.hears(['networks', 'net'], 'direct_message,direct_mention', function (bot, message) {
 
     bot.reply(message, "Let's check what's on your Meraki ORG...");
 
@@ -78,9 +78,9 @@ controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (
 //
 // Command: next
 //
-controller.hears(['next\s*(.*)', 'upcomings*(.*)', 'events*(.*)'], 'direct_message,direct_mention', function (bot, message) {
+controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (bot, message) {
 
-    bot.reply(message, "_heard you! asking my crystal ball..._");
+    bot.reply(message, "Let's check what's on your Meraki Network...");
 
     var limit = parseInt(message.match[1]);
     if (!limit) limit = 5;
@@ -88,7 +88,7 @@ controller.hears(['next\s*(.*)', 'upcomings*(.*)', 'events*(.*)'], 'direct_messa
 
     Events.fetchNext(limit, function (err, events, text) {
         if (err) {
-            bot.reply(message, "**sorry, ball seems broken  :-(**");
+            bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
         }
 
