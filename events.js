@@ -35,7 +35,7 @@ module.exports.fetchNetwork = function (limit, cb) {
 
     // List Networks
     var options = {
-        method: 'POST',
+        method: 'GET',
         url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices/claim",
         headers: {
             "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
