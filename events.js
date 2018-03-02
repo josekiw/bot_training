@@ -36,7 +36,9 @@ module.exports.fetchNext = function (limit, cb) {
     // Get list of upcoming events
     var options = {
         method: 'GET',
-        url: "http://api.cepsa.kiw.one/navigation"
+        url: "https://dashboard.meraki.com/api/v0/organizations",
+        X-Cisco-Meraki-API-Key: "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
+        content-type: "application/json"
     };
 
     request(options, function (error, response, body) {
@@ -80,10 +82,12 @@ module.exports.fetchNext = function (limit, cb) {
 
 module.exports.fetchCurrent = function (cb) {
 
-    // Get list of upcoming events
+    // Get list of upcoming events - NOW
     var options = {
         method: 'GET',
-        url: "http://api.cepsa.kiw.one/navigation"
+        url: "https://dashboard.meraki.com/api/v0/organizations",
+        X-Cisco-Meraki-API-Key: "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
+        content-type: "application/json"
     };
 
     request(options, function (error, response, body) {
