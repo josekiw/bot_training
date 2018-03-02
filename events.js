@@ -56,28 +56,28 @@ module.exports.fetchNetworks = function (cb) {
             return;
         }
 
-        var events = JSON.parse(body);
-        debug("fetched " + events.length + " events");
-        fine(JSON.stringify(events));
+        var networks = JSON.parse(body);
+        debug("fetched " + networks.length + " networks");
+        fine(JSON.stringify(networks));
 
-        if (events.length == 0) {
-            cb(null, events, "Sorry, no networks on your Meraki ORG");
+        if (networks.length == 0) {
+            cb(null, networks, "Sorry, no networks on your Meraki ORG");
             return;
         }
 
-        var nb = events.length;
+        var nb = networks.length;
         var msg = "**" + nb + " Networks on your Meraki ORG:**";
         if (nb == 1) {
             msg = "**only one network is active now:**";
         }
         for (var i = 0; i < nb; i++) {
-            var current = events[i];
+            var current = networks[i];
             //msg += "\n:small_blue_diamond: "
             msg += "\n" + (i+1) + ". ";
             msg += current.name + " - " + current.type + " - " + current.timeZone;
         }
 
-        cb(null, events, msg);
+        cb(null, networks, msg);
     });
 }
 
