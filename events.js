@@ -61,7 +61,7 @@ module.exports.fetchNext = function (limit, cb) {
         fine(JSON.stringify(events));
 
         if (events.length == 0) {
-            cb(null, events, "**Guess what? No upcoming event!**");
+            cb(null, events, "Sorry, no claimed devices on your Meraki Network");
             return;
         }
 
