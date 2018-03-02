@@ -55,7 +55,7 @@ controller.hears(['networks', 'net'], 'direct_message,direct_mention', function 
 
     bot.reply(message, "Let's check what's on your Meraki ORG...");
 
-    Events.fetchNetwork(function (err, events, text) {
+    Events.fetchNetworks(function (err, events, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
