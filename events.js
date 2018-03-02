@@ -33,12 +33,14 @@ var request = require("request");
 
 module.exports.fetchNext = function (limit, cb) {
 
-    // Get list of upcoming events
+    // Get list of upcoming events - NEXT
     var options = {
         method: 'GET',
         url: "https://dashboard.meraki.com/api/v0/organizations",
-        X-Cisco-Meraki-API-Key: "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
-        content-type: "application/json"
+        headers: {
+            "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
+            "content-type": "application/json"
+        }
     };
 
     request(options, function (error, response, body) {
@@ -86,8 +88,11 @@ module.exports.fetchCurrent = function (cb) {
     var options = {
         method: 'GET',
         url: "https://dashboard.meraki.com/api/v0/organizations",
-        X-Cisco-Meraki-API-Key: "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
-        content-type: "application/json"
+        headers: {
+            "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
+            "content-type": "application/json"
+        }
+        
     };
 
     request(options, function (error, response, body) {
