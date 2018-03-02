@@ -97,28 +97,28 @@ module.exports.fetchCurrent = function (cb) {
 
     request(options, function (error, response, body) {
         if (error) {
-            debug("could not retreive list of events, error: " + error);
-            cb(new Error("Could not retreive current events, sorry [Events API not responding]"), null, null);
+            debug("could not retreive list of networks, error: " + error);
+            cb(new Error("Could not retreive current networks, sorry [Meraki API not responding]"), null, null);
             return;
         }
 
         if ((response < 200) || (response > 299)) {
-            console.log("could not retreive list of events, response: " + response);
-            sparkCallback(new Error("Could not retreive current events, sorry [bad anwser from Events API]"), null, null);
+            console.log("could not retreive list of networks, response: " + response);
+            sparkCallback(new Error("Could not retreive current networks, sorry [bad anwser from Meraki API]"), null, null);
             return;
         }
 
         var events = JSON.parse(body);
-        debug("fetched " + events.length + " events");
+        debug("fetched " + events.length + " networks");
         fine(JSON.stringify(events));
 
         if (events.length == 0) {
-            cb(null, events, "**Found no event currently going on.**");
+            cb(null, events, "**Found no networks currently on your Meraki ORG**");
             return;
         }
 
         var nb = events.length;
-        var msg = "**" + nb + " events are running now:**";
+        var msg = "**" + nb + " Networks are on your Meraki ORG:**";
         if (nb == 1) {
             msg = "**only one event is running now:**";
         }
