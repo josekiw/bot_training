@@ -51,25 +51,25 @@ var Events = require("./events.js");
 //
 // Command: now
 //
-controller.hears(['now', 'current'], 'direct_message,direct_mention', function (bot, message) {
+controller.hears(['networks', 'net'], 'direct_message,direct_mention', function (bot, message) {
 
-    bot.reply(message, "_heard you! let's check what's happening now..._");
+    bot.reply(message, "Let's check what's on your Meraki ORG...");
 
     Events.fetchCurrent(function (err, events, text) {
         if (err) {
-            bot.reply(message, "*sorry, could not contact the organizers :-(*");
+            bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
         }
 
         if (events.length == 0) {
-            bot.reply(message, text + "\n\n_Type next for upcoming events_");
+            bot.reply(message, text + "\n\nType next for more...");
             return;
         }
 
         // Store events
         var toPersist = { "id": message.user, "events": events };
         controller.storage.users.save(toPersist, function (err, id) {
-            bot.reply(message, text + "\n\n_Type about [number] for more details_");
+            bot.reply(message, text + "\n\nType about [number] for more details");
         });
     });
 });
