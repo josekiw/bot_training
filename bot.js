@@ -55,19 +55,19 @@ controller.hears(['networks', 'net'], 'direct_message,direct_mention', function 
 
     bot.reply(message, "Let's check what's on your Meraki ORG...");
 
-    Events.fetchNetworks(function (err, events, text) {
+    Events.fetchNetworks(function (err, networks, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
         }
 
-        if (events.length == 0) {
+        if (networks.length == 0) {
             bot.reply(message, text + "\n\nType next for more...");
             return;
         }
 
-        // Store events
-        var toPersist = { "id": message.user, "events": events };
+        // Store networks
+        var toPersist = { "id": message.user, "networks": networks };
         controller.storage.users.save(toPersist, function (err, id) {
             bot.reply(message, text + "\n\nType about [number] for more details");
         });
@@ -86,14 +86,14 @@ controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (
     if (!limit) limit = 5;
     if (limit < 1) limit = 1;
 
-    Events.fetchDevices(limit, function (err, events, text) {
+    Events.fetchDevices(limit, function (err, devices, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
         }
 
         // Store events
-        var toPersist = { "id": message.user, "events": events };
+        var toPersist = { "id": message.user, "events": devices };
         controller.storage.users.save(toPersist, function (err, id) {
             if (err != null) {
                 bot.reply(message, text);
@@ -117,14 +117,14 @@ controller.hears(['claim'], 'direct_message,direct_mention', function (bot, mess
     if (!limit) limit = 5;
     if (limit < 1) limit = 1;
 
-    Events.fetchClaim(limit, function (err, events, text) {
+    Events.fetchClaim(limit, function (err, claim, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
         }
 
         // Store events
-        var toPersist = { "id": message.user, "events": events };
+        var toPersist = { "id": message.user, "events": claim };
         controller.storage.users.save(toPersist, function (err, id) {
             if (err != null) {
                 bot.reply(message, text);
