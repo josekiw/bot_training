@@ -55,7 +55,7 @@ controller.hears(['networks', 'net'], 'direct_message,direct_mention', function 
 
     bot.reply(message, "Let's check what's on your Meraki ORG...");
 
-    Events.fetchCurrent(function (err, events, text) {
+    Events.fetchNetwork(function (err, events, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
@@ -76,7 +76,7 @@ controller.hears(['networks', 'net'], 'direct_message,direct_mention', function 
 
 
 //
-// Command: next
+// Command: Devices
 //
 controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (bot, message) {
 
@@ -86,7 +86,7 @@ controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (
     if (!limit) limit = 5;
     if (limit < 1) limit = 1;
 
-    Events.fetchNext(limit, function (err, events, text) {
+    Events.fetchDevices(limit, function (err, events, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
@@ -101,6 +101,37 @@ controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (
             }
 
             bot.reply(message, text + "\n\n_Type about [number] for more details_");
+        });
+    });
+
+});
+
+//
+// Command: claim
+//
+controller.hears(['claim'], 'direct_message,direct_mention', function (bot, message) {
+
+    bot.reply(message, "Let's claim a new device to your Meraki Network...");
+
+    var limit = parseInt(message.match[1]);
+    if (!limit) limit = 5;
+    if (limit < 1) limit = 1;
+
+    Events.fetchClaim(limit, function (err, events, text) {
+        if (err) {
+            bot.reply(message, "Sorry, could not contact Meraki ORG...");
+            return;
+        }
+
+        // Store events
+        var toPersist = { "id": message.user, "events": events };
+        controller.storage.users.save(toPersist, function (err, id) {
+            if (err != null) {
+                bot.reply(message, text);
+                return;
+            }
+
+            bot.reply(message, text + "\n\n_Done_");
         });
     });
 

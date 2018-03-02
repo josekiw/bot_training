@@ -31,15 +31,71 @@ var fine = require("debug")("samples:fine");
 var request = require("request");
 
 
-module.exports.fetchNext = function (limit, cb) {
+module.exports.fetchNetwork = function (limit, cb) {
 
-    // Get list of upcoming events - NEXT
+    // List Networks
     var options = {
-        method: 'GET',
-        url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices",
+        method: 'POST',
+        url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices/claim",
         headers: {
             "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
             "content-type": "application/json"
+        },
+        body: {
+            "serial": "Q2FD-TUKH-CR8V"
+        }
+    };
+
+    request(options, function (error, response, body) {
+        if (error) {
+            debug("could not retreive list of devices, error: " + error);
+            cb(new Error("Could not retreive current devices, sorry [MEraki API not responding]"), null, null);
+            return;
+        }
+
+        if ((response < 200) || (response > 299)) {
+            console.log("could not retreive list of devices, response: " + response);
+            sparkCallback(new Error("Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
+            return;
+        }
+
+        var events = JSON.parse(body);
+        debug("fetched " + events.length + " events");
+        fine(JSON.stringify(events));
+
+        if (events.length == 0) {
+            cb(null, events, "Sorry, no claimed devices on your Meraki Network");
+            return;
+        }
+
+        var nb = events.length;
+        var msg = "**" + nb + " Devices claimed on your Meraki Network:**";
+        if (nb == 1) {
+            msg = "**only one device is claimed now:**";
+        }
+        for (var i = 0; i < nb; i++) {
+            var current = events[i];
+            //msg += "\n:small_blue_diamond: "
+            msg += "\n" + (i+1) + ". ";
+            msg += current.model + " - " + current.mac + " - " + current.serial;
+        }
+
+        cb(null, events, msg);
+    });
+}
+
+module.exports.fetchClaim = function (limit, cb) {
+
+    // POST - Claim new device
+    var options = {
+        method: 'POST',
+        url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices/claim",
+        headers: {
+            "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
+            "content-type": "application/json"
+        },
+        body: {
+            "serial": "Q2FD-TUKH-CR8V"
         }
     };
 
@@ -82,7 +138,7 @@ module.exports.fetchNext = function (limit, cb) {
 }
 
 
-module.exports.fetchCurrent = function (cb) {
+module.exports.fetchDevices = function (cb) {
 
     // Get list of devices in a Network
     var options = {
