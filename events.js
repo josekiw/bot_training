@@ -166,7 +166,7 @@ module.exports.fetchDevices = function (cb) {
         fine(JSON.stringify(events));
 
         if (events.length == 0) {
-            sparkCallback(new Error("Found no devices on your Meraki Network"), null, null);
+            cb(null, events, "Sorry, no devices on your Meraki Network");
             return;
         }
 
