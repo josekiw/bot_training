@@ -70,7 +70,7 @@ module.exports.fetchNext = function (limit, cb) {
             var current = events[i];
             //msg += "\n:small_blue_diamond: "
             msg += "\n" + (i+1) + ". ";
-            msg += current.beginDay + " - " + current.endDay + ": [" + current.name + "](" + current.url + "), " + current.city + " (" + current.country + ")";
+            msg += current.date + " - " + current.network + ": [" + current.IPsrc + "](" + current.IPdst + "), " + current.Pdst + " (" + current.url + ")";
         }
 
         cb(null, events, msg);
