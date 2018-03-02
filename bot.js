@@ -45,17 +45,17 @@ controller.setupWebserver(process.env.PORT || 3000, function(err, webserver) {
 
 
 // event API wrapper that preformats messages to send back to Slack
-var Events = require("./events.js");
-
+var Networks = require("./networks.js");
+var Devices = require("./devices.js")
 
 //
-// Command: now
+// Command: Networks
 //
 controller.hears(['networks', 'net'], 'direct_message,direct_mention', function (bot, message) {
 
     bot.reply(message, "Let's check what's on your Meraki ORG...");
 
-    Events.fetchNetworks(function (err, networks, text) {
+    Networks.fetchNetworks(function (err, networks, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
@@ -86,7 +86,7 @@ controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (
     if (!limit) limit = 5;
     if (limit < 1) limit = 1;
 
-    Events.fetchDevices(limit, function (err, devices, text) {
+    Devices.fetchDevices(limit, function (err, devices, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
@@ -117,7 +117,7 @@ controller.hears(['claim'], 'direct_message,direct_mention', function (bot, mess
     if (!limit) limit = 5;
     if (limit < 1) limit = 1;
 
-    Events.fetchClaim(limit, function (err, claim, text) {
+    Claim.fetchClaim(limit, function (err, claim, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
