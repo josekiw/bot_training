@@ -11,7 +11,7 @@ module.exports.fetchClaim = function (cb) {
     var form = new FormData();
         form.append("serial", "Q2FD-TUKH-CR8V");
 
-    var options = {
+    var settings = {
         async: true,
         crossDomain: true,
         method: 'POST',
@@ -26,41 +26,8 @@ module.exports.fetchClaim = function (cb) {
         data: form
     };
 
-    request(options, function (error, response, body) {
-        if (error) {
-            debug("could not retreive list of networks, error: " + error);
-            cb(new Error("Could not retreive current networks, sorry [Meraki API not responding]"), null, null);
-            return;
-        }
-
-        if ((response < 200) || (response > 299)) {
-            console.log("could not retreive list of networks, response: " + response);
-            sparkCallback(new Error("Could not retreive current networks, sorry [bad anwser from Meraki API]"), null, null);
-            return;
-        }
-
-        var claim = JSON.parse(body);
-        debug("fetched " + claim.length + " claimed");
-        fine(JSON.stringify(claim));
-
-        if (claim.length == 0) {
-            cb(null, claim, "Sorry, no claimed devoces on your Meraki ORG");
-            return;
-        }
-
-        var nb = claim.length;
-        var msg = "**" + nb + " Claimed devices on your Meraki ORG:**";
-        if (nb == 1) {
-            msg = "**only one claimed device is active now:**";
-        }
-        for (var i = 0; i < nb; i++) {
-            var current = claim[i];
-            //msg += "\n:small_blue_diamond: "
-            msg += "\n" + (i+1) + ". ";
-            msg += current.name + " - " + current.type + " - " + current.timeZone;
-        }
-
-        cb(null, networks, msg);
+    $.ajax(settings).done(function (response) {
+        console.log(response);
     });
 }
 
