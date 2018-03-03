@@ -12,12 +12,17 @@ module.exports.fetchClaim = function (cb) {
         form.append("serial", "Q2FD-TUKH-CR8V");
 
     var options = {
+        async: true,
+        crossDomain: true,
         method: 'POST',
         url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices/claim",
         headers: {
             "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
             "content-type": "application/json"
         },
+        processData: false,
+        contentType: false,
+        mimeType: "multipart/form-data",
         data: form
     };
 
