@@ -8,6 +8,9 @@ var request = require("request");
 module.exports.fetchClaim = function (cb) {
 
     // POST - Claim new device
+    var form = new FormData();
+        form.append("serial", "Q2FD-TUKH-CR8V");
+
     var options = {
         method: 'POST',
         url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices/claim",
@@ -15,7 +18,7 @@ module.exports.fetchClaim = function (cb) {
             "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
             "content-type": "application/json"
         },
-  
+        data: form
     };
 
     request(options, function (error, response, body) {
