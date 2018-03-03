@@ -15,9 +15,7 @@ module.exports.fetchClaim = function (cb) {
             "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
             "content-type": "application/json"
         },
-        body: {
-            "serial": "Q2FD-TUKH-CR8V"
-        }
+  
     };
 
     request(options, function (error, response, body) {
