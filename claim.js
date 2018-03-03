@@ -9,8 +9,8 @@ module.exports.fetchClaim = function (cb) {
 
     // POST - Claim new device
     var options = {
-        method: 'GET',
-        url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices",
+        method: 'POST',
+        url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices/claim",
         headers: {
             "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
             "content-type": "application/json"
@@ -22,39 +22,39 @@ module.exports.fetchClaim = function (cb) {
 
     request(options, function (error, response, body) {
         if (error) {
-            debug("could not retreive list of devices, error: " + error);
-            cb(new Error("Could not retreive current devices, sorry [MEraki API not responding]"), null, null);
+            debug("could not retreive list of networks, error: " + error);
+            cb(new Error("Could not retreive current networks, sorry [Meraki API not responding]"), null, null);
             return;
         }
 
         if ((response < 200) || (response > 299)) {
-            console.log("could not retreive list of devices, response: " + response);
-            sparkCallback(new Error("Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
+            console.log("could not retreive list of networks, response: " + response);
+            sparkCallback(new Error("Could not retreive current networks, sorry [bad anwser from Meraki API]"), null, null);
             return;
         }
 
-        var events = JSON.parse(body);
-        debug("fetched " + events.length + " events");
-        fine(JSON.stringify(events));
+        var claim = JSON.parse(body);
+        debug("fetched " + claim.length + " claimed");
+        fine(JSON.stringify(claim));
 
-        if (events.length == 0) {
-            cb(null, events, "Sorry, no claimed devices on your Meraki Network");
+        if (claim.length == 0) {
+            cb(null, claim, "Sorry, no claimed devoces on your Meraki ORG");
             return;
         }
 
-        var nb = events.length;
-        var msg = "**" + nb + " Devices claimed on your Meraki Network:**";
+        var nb = claim.length;
+        var msg = "**" + nb + " Claimed devices on your Meraki ORG:**";
         if (nb == 1) {
-            msg = "**only one device is claimed now:**";
+            msg = "**only one claimed device is active now:**";
         }
         for (var i = 0; i < nb; i++) {
-            var current = events[i];
+            var current = claim[i];
             //msg += "\n:small_blue_diamond: "
             msg += "\n" + (i+1) + ". ";
-            msg += current.model + " - " + current.mac + " - " + current.serial;
+            msg += current.name + " - " + current.type + " - " + current.timeZone;
         }
 
-        cb(null, events, msg);
+        cb(null, networks, msg);
     });
 }
 
