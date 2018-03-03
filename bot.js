@@ -106,7 +106,7 @@ controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (
 //
 // Command: Claim
 //
-controller.hears(['claim'], 'direct_message,direct_mention', function (bot, message) {
+controller.hears(['provisioning'], 'direct_message,direct_mention', function (bot, message) {
 
     bot.reply(message, "Let's claim a SN on your Meraki ORG...");
 
