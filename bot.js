@@ -106,7 +106,7 @@ controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (
 //
 // Command: Claim
 //
-controller.hears(['provisioning'], 'direct_message,direct_mention', function (bot, message) {
+controller.hears(['claim'], 'direct_message,direct_mention', function (bot, message) {
 
     bot.reply(message, "Let's claim a SN on your Meraki ORG...");
 
@@ -131,7 +131,7 @@ controller.hears(['provisioning'], 'direct_message,direct_mention', function (bo
 
 
 //
-// Command: about
+// Command: Assistant
 //
 controller.hears(['show\s*(.*)', 'more\s*(.*)', 'about\s*(.*)'], 'direct_message,direct_mention,mention', function (bot, message) {
 
@@ -210,7 +210,7 @@ controller.hears(['show\s*(.*)', 'more\s*(.*)', 'about\s*(.*)'], 'direct_message
 // Command: help
 //
 controller.hears(["help", "who are you"], 'direct_message,direct_mention', function (bot, message) {
-    var text = "I am a bot, can help you find current and upcoming events at [Cisco DevNet](https://developer.cisco.com)\n\nCommands I understand: now, next [max], about [index]";
+    var text = "I am a bot and I can help you with your Meraki Networks\n\nCommands I do understand: networks, devices, claim";
     bot.reply(message, text);
 });
 

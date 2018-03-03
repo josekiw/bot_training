@@ -9,8 +9,8 @@ module.exports.fetchClaim = function (cb) {
 
     // POST - Claim new device
     var options = {
-        method: 'POST',
-        url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices/claim",
+        method: 'GET',
+        url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices",
         headers: {
             "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
             "content-type": "application/json"
