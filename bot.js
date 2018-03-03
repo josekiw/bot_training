@@ -83,10 +83,6 @@ controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (
 
     bot.reply(message, "Let's check what's on your Meraki Network...");
 
-    var limit = parseInt(message.match[1]);
-    if (!limit) limit = 5;
-    if (limit < 1) limit = 1;
-
     Devices.fetchDevices(function (err, devices, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
@@ -94,7 +90,7 @@ controller.hears(['devices', 'dev'], 'direct_message,direct_mention', function (
         }
 
         // Store events
-        var toPersist = { "id": message.user, "events": devices };
+        var toPersist = { "id": message.user, "devices": devices };
         controller.storage.users.save(toPersist, function (err, id) {
             if (err != null) {
                 bot.reply(message, text);
