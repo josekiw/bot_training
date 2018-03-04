@@ -5,7 +5,7 @@ var fine = require("debug")("samples:fine");
 var request = require("request");
 
 
-module.exports.fetchUnClaim = function (cb) {
+module.exports.fetchRemove = function (cb) {
 
     var request = require("request");
 
