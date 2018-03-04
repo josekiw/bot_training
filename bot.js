@@ -48,6 +48,7 @@ controller.setupWebserver(process.env.PORT || 3000, function(err, webserver) {
 var Networks = require("./networks.js");
 var Devices = require("./devices.js")
 var Claim = require("./claim.js")
+var Remove = require("./remove.js")
 
 //
 // Command: Networks
