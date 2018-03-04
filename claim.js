@@ -7,33 +7,21 @@ var request = require("request");
 
 module.exports.fetchClaim = function (cb) {
 
-    var http = require("https");
+    var request = require("request");
 
-    var options = {
-      "method": "POST",
-      "hostname": "dashboard.meraki.com",
-      "path": "api/v0/networks/N_595038100766367032/devices/claim",
-      "headers": {
-        "content-type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
-        "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
-        "Cache-Control": "no-cache",
-      }
-    };
+    var options = { method: 'POST',
+      url: 'https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices/claim',
+      headers: 
+       { 'Postman-Token': 'f12c1a69-cdec-408b-a28b-e6323eea8227',
+         'Cache-Control': 'no-cache',
+         'X-Cisco-Meraki-API-Key': '6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7',
+         'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
+      formData: { serial: 'Q2FD-TUKH-CR8V' } };
     
-    var req = http.request(options, function (res) {
-      var chunks = [];
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
     
-      res.on("data", function (chunk) {
-        chunks.push(chunk);
-      });
-    
-      res.on("end", function () {
-        var body = Buffer.concat(chunks);
-        console.log(body.toString());
-      });
+      console.log(body);
     });
-    
-    req.write("------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"serial\"\r\n\r\nQ2FD-TUKH-CR8V\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--");
-    req.end();
 
 }
