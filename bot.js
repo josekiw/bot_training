@@ -129,6 +129,32 @@ controller.hears(['claim'], 'direct_message,direct_mention', function (bot, mess
     });
 });
 
+//
+// Command: UnClaim
+//
+controller.hears(['unclaim'], 'direct_message,direct_mention', function (bot, message) {
+
+    bot.reply(message, "Let's unclaim a SN on your Meraki ORG...");
+
+    UnClaim.fetchUnClaim(function (err, unclaim, text) {
+        if (err) {
+            bot.reply(message, "Sorry, could not contact Meraki ORG...");
+            return;
+        }
+
+        if (unclaim.length == 0) {
+            bot.reply(message, text + "\n\nType next for more...");
+            return;
+        }
+
+        // Store networks
+        var toPersist = { "id": message.user, "unclaimed": unclaim };
+        controller.storage.users.save(toPersist, function (err, id) {
+            bot.reply(message, text + "\n\nType about [number] for more details");
+        });
+    });
+});
+
 
 //
 // Command: Assistant
@@ -210,7 +236,7 @@ controller.hears(['show\s*(.*)', 'more\s*(.*)', 'about\s*(.*)'], 'direct_message
 // Command: help
 //
 controller.hears(["help", "who are you"], 'direct_message,direct_mention', function (bot, message) {
-    var text = "I am a bot and I can help you with your Meraki Networks\n\nCommands I do understand at this moment: networks, devices, claim";
+    var text = "I am a bot and I can help you with your Meraki Networks\n\nCommands I do understand at this moment: networks, devices, claim, unclaim";
     bot.reply(message, text);
 });
 
