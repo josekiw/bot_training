@@ -160,12 +160,12 @@ controller.hears(['remove'], 'direct_message,direct_mention', function (bot, mes
 //
 // Command: Assistant
 //
-controller.hears(['show\s*(.*)', 'more\s*(.*)', 'about\s*(.*)'], 'direct_message,direct_mention,mention', function (bot, message) {
+controller.hears(['assistant'], 'direct_message,direct_mention,mention', function (bot, message) {
 
     var keyword = message.match[1];
     if (!keyword) {
         bot.startConversation(message, function (err, convo) {
-            convo.ask("Which event are you inquiring about? (type a number or cancel)", [
+            convo.ask("Available Options: \n\n 1. Wireless SSID \n\n 2. Wireless Auth \n\n Which option are you trying to setup? (type a number or cancel)", [
                 {
                     pattern: "cancel",
                     callback: function (response, convo) {
@@ -205,7 +205,7 @@ controller.hears(['show\s*(.*)', 'more\s*(.*)', 'about\s*(.*)'], 'direct_message
                     //var about = convo.extractResponse('about');
                     var number = convo.vars["number"];
                     if (number) {
-                        displayEvent(bot, controller, message, number);
+                        displayConfig(bot, controller, message, number);
                         return;
                     }
 
@@ -224,7 +224,7 @@ controller.hears(['show\s*(.*)', 'more\s*(.*)', 'about\s*(.*)'], 'direct_message
     // Check arg for number
     var number = parseInt(keyword);
     if (number) {
-        displayEvent(bot, controller, message, number);
+        displayConfig(bot, controller, message, number);
         return;
     }
     
@@ -255,10 +255,10 @@ controller.hears(["(.*)"], 'direct_message,direct_mention', function (bot, messa
 // Utilities
 //
 
-function displayEvent(bot, controller, message, number) {
+function displayConfig(bot, controller, message, number) {
     controller.storage.users.get(message.user, function (err, user_data) {
         if (!user_data) {
-            bot.reply(message, "Please look for current or upcoming events, before inquiring about event details");
+            bot.reply(message, "Please look for current config settings, before inquiring about config details");
             return;
         }
 
@@ -266,7 +266,7 @@ function displayEvent(bot, controller, message, number) {
         if (number <= 0) number = 1;
         if (number > events.length) number = events.length;
         if (number == 0) {
-            bot.reply(message, "sorry, seems we don't have any event to display details for");
+            bot.reply(message, "sorry, seems we don't have any config to display details for");
             return;
         }
 
