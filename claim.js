@@ -11,24 +11,12 @@ module.exports.fetchClaim = function (cb) {
 
     var options = {
       "method": "POST",
-      "hostname": [
-        "n57",
-        "meraki",
-        "com"
-      ],
-      "path": [
-        "api",
-        "v0",
-        "networks",
-        "N_595038100766367032",
-        "devices",
-        "claim"
-      ],
+      "hostname": "dashboard.meraki.com",
+      "path": "api/v0/networks/N_595038100766367032/devices/claim",
       "headers": {
         "content-type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
         "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
         "Cache-Control": "no-cache",
-        "Postman-Token": "dec079a8-9134-4da1-99b1-2eca7edb2550"
       }
     };
     
