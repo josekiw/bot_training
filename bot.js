@@ -130,25 +130,25 @@ controller.hears(['claim'], 'direct_message,direct_mention', function (bot, mess
 });
 
 //
-// Command: UnClaim
+// Command: Remove
 //
-controller.hears(['unclaim'], 'direct_message,direct_mention', function (bot, message) {
+controller.hears(['remove'], 'direct_message,direct_mention', function (bot, message) {
 
-    bot.reply(message, "Let's unclaim a SN on your Meraki ORG...");
+    bot.reply(message, "Let's remove a SN on your Meraki ORG...");
 
-    UnClaim.fetchUnClaim(function (err, unclaim, text) {
+    Remove.fetchRemove(function (err, remove, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
         }
 
-        if (unclaim.length == 0) {
+        if (remove.length == 0) {
             bot.reply(message, text + "\n\nType next for more...");
             return;
         }
 
         // Store networks
-        var toPersist = { "id": message.user, "unclaimed": unclaim };
+        var toPersist = { "id": message.user, "unclaimed": remove };
         controller.storage.users.save(toPersist, function (err, id) {
             bot.reply(message, text + "\n\nType about [number] for more details");
         });
