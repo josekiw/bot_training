@@ -7,56 +7,45 @@ var request = require("request");
 
 module.exports.fetchClaim = function (cb) {
 
-    // POST - Claim new device
-    var form = new FormData();
-        form.append("serial", "Q2FD-TUKH-CR8V");
+    var http = require("https");
 
-    var settings = {
-        async: true,
-        crossDomain: true,
-        method: 'POST',
-        url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices/claim",
-        headers: {
-            "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
-            "content-type": "application/json"
-        },
-        processData: false,
-        contentType: false,
-        mimeType: "multipart/form-data",
-        data: form
+    var options = {
+      "method": "POST",
+      "hostname": [
+        "n57",
+        "meraki",
+        "com"
+      ],
+      "path": [
+        "api",
+        "v0",
+        "networks",
+        "N_595038100766367032",
+        "devices",
+        "claim"
+      ],
+      "headers": {
+        "content-type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+        "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
+        "Cache-Control": "no-cache",
+        "Postman-Token": "dec079a8-9134-4da1-99b1-2eca7edb2550"
+      }
     };
-
-    $.ajax(settings).done(function (response) {
-        console.log(response);
+    
+    var req = http.request(options, function (res) {
+      var chunks = [];
+    
+      res.on("data", function (chunk) {
+        chunks.push(chunk);
+      });
+    
+      res.on("end", function () {
+        var body = Buffer.concat(chunks);
+        console.log(body.toString());
+      });
     });
-}
+    
+    req.write("------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"serial\"\r\n\r\nQ2FD-TUKH-CR8V\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--");
+    req.end();
 
-
-module.exports.generateEventsDetails = function (event) {
-
-    // 1 line
-    var md = "about **" + event.name + "**";
-
-    // 2 line
-    md += "\n\n_" + event.category + " in " + event.city + " (" + event.country + ")";
-    if (event.beginDay != event.endDay) {
-        md += " from " + event.beginDayInWeek + " " + event.beginDay + ", " + event.beginTime;
-        md += " till " + event.endDayInWeek + " " + event.endDay + ", " + event.endTime;
-    }
-    else {
-        md += " on " + event.beginDayInWeek + " " + event.beginDay + ", from " + event.beginTime + " till " + event.endTime;
-    }
-
-    // 3rd and after...
-    md += "_\n\n" + event.description;
-
-    // last line
-    var more = "more on [ciscodevnet](" + event.url + ")";
-    if (event.location_url) {
-        more += ", [organizer](" + event.location_url + ")";
-    }
-    more += ", [json](https://devnet-events-api.herokuapp.com/api/v1/events/" + event.id + ")";
-    md += "\n\n" + more;
-
-    return md;
 }
