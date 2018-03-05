@@ -10,6 +10,7 @@ module.exports.fetchTraffic = function (cb) {
     var options = {
         method: 'GET',
         url: "https://dashboard.meraki.com/api/v0/networks/L_595038100766328722/traffic",
+        qs: { timespan: '7200' },
         headers: {
             "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
             "content-type": "application/json"
