@@ -140,7 +140,7 @@ controller.hears(['license'], 'direct_message,direct_mention', function (bot, me
 
     bot.reply(message, "Let's check license state on your Meraki Network...");
 
-    Traffic.fetchLicense(function (err, devices, text) {
+    License.fetchLicense(function (err, devices, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
