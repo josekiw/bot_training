@@ -113,7 +113,7 @@ controller.hears(['traffic'], 'direct_message,direct_mention', function (bot, me
 
     bot.reply(message, "Let's check what's up on your Meraki Network...");
 
-    Traffic.fetchTraffic(function (err, devices, text) {
+    Traffic.fetchTraffic(function (err, traffic, text) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
