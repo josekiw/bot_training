@@ -20,7 +20,7 @@ module.exports.fetchTraffic = function (cb) {
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
       
-        bot.reply(body);
+        bot.reply(body,text);
     });
 }
 
