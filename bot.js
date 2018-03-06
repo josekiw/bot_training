@@ -293,7 +293,7 @@ controller.hears(['assistant'], 'direct_message,direct_mention,mention', functio
 // Command: help
 //
 controller.hears(["help", "who are you"], 'direct_message,direct_mention', function (bot, message) {
-    var text = "I am a bot and I can help you with your Meraki Networks\n\nCommands I do understand at this moment: networks, devices, claim, remove, traffic, license";
+    var text = "I am a bot and I can help you with your Meraki Networks\n\nCommands I do understand at this moment: networks, devices, claim, remove, traffic";
     bot.reply(message, text);
 });
 
