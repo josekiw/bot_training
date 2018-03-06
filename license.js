@@ -6,7 +6,7 @@ var request = require("request");
 
 module.exports.fetchLicense = function (cb) {
 
-    // List Networks
+    // List License
     var options = {
         method: 'GET',
         url: "https://dashboard.meraki.com/api/v0/organizations/595038100766326843/licenseState",
@@ -15,11 +15,43 @@ module.exports.fetchLicense = function (cb) {
             "content-type": "application/json"
         }
     };
-
     request(options, function (error, response, body) {
-        if (error) throw new Error(error);
-      
-        console.log(body);
+
+    if (error) {
+        debug("could not retreive license, error: " + error);
+        cb(new Error("Could not retreive current license, sorry [Meraki API not responding]"), null, null);
+        return;
+    }
+
+    if ((response < 200) || (response > 299)) {
+        console.log("could not retreive license, response: " + response);
+        sparkCallback(new Error("Could not retreive current license, sorry [bad anwser from Meraki API]"), null, null);
+        return;
+    }
+
+    var license = JSON.parse(body);
+    debug("fetched " + license.length + " license");
+    fine(JSON.stringify(traffic));
+
+    if (license.length == 0) {
+        cb(null, license, "Sorry, no license on your Meraki Network");
+        return;
+    }
+
+    var nb = license.length;
+    var msg = "Analysing license...";
+    if (nb == 1) {
+        msg = "Onlye one license on your Meraki Network...";
+    }
+    for (var i = 0; i < nb; i++) {
+        var current = license[i];
+        //msg += "\n:small_blue_diamond: "
+        msg += "\n" + (i+1) + ". ";
+        msg += current.status + " until " + current.expirationDate;
+    }
+
+    cb(null, license, msg);
+
     });
 }
 
