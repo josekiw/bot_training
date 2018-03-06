@@ -31,7 +31,7 @@ module.exports.fetchLicense = function (cb) {
 
     var license = JSON.parse(body);
     debug("fetched " + license.length + " license");
-    fine(JSON.stringify(traffic));
+    fine(JSON.stringify(license));
 
     if (license.length == 0) {
         cb(null, license, "Sorry, no license on your Meraki Network");
