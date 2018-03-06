@@ -9,7 +9,7 @@ module.exports.fetchLicense = function (cb) {
     // List License
     var options = {
         method: 'GET',
-        url: "https://dashboard.meraki.com/api/v0/organizations/595038100766326843/licenseState",
+        url: "https://dashboard.meraki.com/api/v0/organizations/L_595038100766328722/licenseState",
         headers: {
             "X-Cisco-Meraki-API-Key": "6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7",
             "content-type": "application/json"
