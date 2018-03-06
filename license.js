@@ -33,23 +33,10 @@ module.exports.fetchLicense = function (cb) {
     debug("fetched " + license.length + " license");
     fine(JSON.stringify(license));
 
-    if (license.length == 0) {
-        cb(null, license, "Sorry, no license on your Meraki Network");
-        return;
-    }
-
-    var nb = license.length;
     var msg = "Analysing license...";
-    if (nb == 1) {
-        msg = "Onlye one license on your Meraki Network...";
-    }
-    for (var i = 0; i < nb; i++) {
-        var current = license[i];
-        //msg += "\n:small_blue_diamond: "
         msg += "\n" + (i+1) + ". ";
         msg += current.status + " until " + current.expirationDate;
-    }
-
+    
     cb(null, license, msg);
 
     });
