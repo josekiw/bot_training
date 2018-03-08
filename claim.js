@@ -20,11 +20,11 @@ module.exports.fetchClaim = function (cb) {
       formData: { serial: 'Q2FD-TUKH-CR8V' } };
     
     request(options, function (error, response, body) {
-      if (error) throw new Error(error);
-    
+      if (error) {
+        throw new Error(error);
+        return body;
+      }
       console.log(body);
-      claimerror += body;
-      return claimerror;
     });
 
 }
