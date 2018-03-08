@@ -22,7 +22,7 @@ module.exports.fetchClaim = function (cb) {
       if (error) throw new Error(error);
     
       console.log(body);
-      return body;
+      return error;
     });
 
 }
