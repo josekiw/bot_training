@@ -46,7 +46,7 @@ module.exports.fetchClaim = function (cb) {
       if (already_claimed != -1) {
           msg = "Sorry, Device is **already claimed** and in API Test - Cliente1";
       }
-      for (var i = 0; i < nb; i++) {
+      for (var i = 0; i < str; i++) {
           var current = claim[i];
           //msg += "\n:small_blue_diamond: "
           msg += "\n" + (i+1) + ". ";
