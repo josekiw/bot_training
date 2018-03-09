@@ -181,7 +181,7 @@ controller.hears(['claim'], 'direct_message,direct_mention', function (bot, mess
         // Store networks
         var toPersist = { "id": message.user, "claimed": claim };
         controller.storage.users.save(toPersist, function (err, id) {
-            bot.reply(message, msg + "\n\nType about [number] for more details");
+            bot.reply(message, msg);
         });
     });
 });
