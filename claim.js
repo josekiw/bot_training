@@ -8,8 +8,7 @@ var request = require("request");
 module.exports.fetchClaim = function (cb) {
 
     var request = require("request");
-    var claimerror = "Error";
-
+    var claim_error = "Ups... error!";
     var options = { method: 'POST',
       url: 'https://n57.meraki.com/api/v0/networks/N_595038100766367032/devices/claim',
       headers: 
@@ -22,9 +21,10 @@ module.exports.fetchClaim = function (cb) {
     request(options, function (error, response, body) {
       if (error) {
         throw new Error(error);
-        return body;
       }
       console.log(body);
+      return claim_error;
+
     });
 
 }
