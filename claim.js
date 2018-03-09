@@ -22,10 +22,10 @@ module.exports.fetchClaim = function (cb) {
           throw new Error(err);
           
         }
-        
+
       var claim_result = JSON.parse(body);
       debug("fetched " + claim_result.length + " claimed");
-      fine(JSON.stringify(devices));
+      fine(JSON.stringify(claim_result));
 
       if (claim_result.length == 0) {
           cb(null, claim_result, "Sorry, no devices claimed on your Meraki ORG");
