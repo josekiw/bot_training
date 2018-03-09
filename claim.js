@@ -17,9 +17,9 @@ module.exports.fetchClaim = function (cb) {
          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
       formData: { serial: 'Q2FD-TUKH-CR8V' } };
     
-    request(options, function (error, response, body) {
-      if (error) {
-        throw new Error(error);
+    request(options, function (err, response, body) {
+      if (err) {
+        throw new Error(err);
         
       }
       console.log(body);
