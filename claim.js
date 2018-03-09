@@ -51,7 +51,7 @@ module.exports.fetchClaim = function (cb) {
           msg += current.errors;
       }
 
-      cb(null, claim, body);
+      cb(null, claim, msg + "\n\n" + body);
       console.log(body);
       
     });
