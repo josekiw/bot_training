@@ -52,7 +52,7 @@ module.exports.fetchClaim = function (cb) {
           msg += current.errors;
       }
 
-      cb(null, current + "\n\n" + body);
+      cb(null, claim, claim.JSON.response + "\n\n" + body);
       console.log(body);
       
     });
