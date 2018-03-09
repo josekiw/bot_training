@@ -167,8 +167,8 @@ controller.hears(['claim'], 'direct_message,direct_mention', function (bot, mess
 
     bot.reply(message, "Let's claim a SN on your Meraki ORG...");
 
-    Claim.fetchClaim(function (error, claim, text) {
-        if (error) {
+    Claim.fetchClaim(function (err, claim, text) {
+        if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
         }
