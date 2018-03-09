@@ -40,7 +40,7 @@ module.exports.fetchClaim = function (cb) {
           return;
       }
 
-      var nb = body;
+      var str = body;
       var already_claimed = str.search("already claimed");
       var msg;
       if (already_claimed != -1) {
