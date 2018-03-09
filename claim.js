@@ -41,8 +41,9 @@ module.exports.fetchClaim = function (cb) {
       }
 
       var nb = body;
-      var msg = "**" + nb + " devices on your Meraki ORG:**";
-      if (nb == "{“errors”:[“Device is already claimed and in API Test - Cliente1”]}") {
+      var already_claimed = str.search("already claimed");
+      var msg;
+      if (already_claimed != -1) {
           msg = "Sorry, Device is **already claimed** and in API Test - Cliente1";
       }
       for (var i = 0; i < nb; i++) {
