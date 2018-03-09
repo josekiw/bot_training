@@ -24,34 +24,24 @@ module.exports.fetchClaim = function (cb) {
           return;
       }
 
-      if ((response < 200) || (response > 299)) {
+        if ((response < 200) || (response > 299)) {
           console.log("could not retreive list of devices, response: " + response);
           sparkCallback(new Error("Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
           return;
       }
 
-      var claim_result = JSON.parse(body);
-      debug("fetched " + claim_result.length + " claimed");
-      fine(JSON.stringify(claim_result));
-
-      if (claim_result.length == 0) {
-          cb(null, claim_result, "Sorry, no devices claimed on your Meraki ORG");
+        if (response == 200) {
+          console.log("Device Claimed successfully: " + response);
+          sparkCallback(new Error("200: Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
+          return;
+        }
+        if (response == 403) {
+          console.log("403: could not retreive list of devices, response: " + response);
+          sparkCallback(new Error("403: Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
           return;
       }
 
-      var nb = claim_result.length;
-      var msg = "**" + nb + " devices on your Meraki ORG:**";
-      if (nb == 1) {
-          msg = "**only one device is active now:**";
-      }
-      for (var i = 0; i < nb; i++) {
-          var current = claim_result[i];
-          //msg += "\n:small_blue_diamond: "
-          msg += "\n" + (i+1) + ". ";
-          msg += current.model + " - " + current.serial + " - " + current.mac;
-      }
 
-      cb(null, claim_result, msg);
       console.log(body);
       
     });
