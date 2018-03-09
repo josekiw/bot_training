@@ -53,6 +53,8 @@ module.exports.fetchClaim = function (cb) {
 
       cb(null, claim, msg);
       console.log(body);
+      console.log(err);
+      console.log(response);
       
     });
 
