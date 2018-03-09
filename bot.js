@@ -167,38 +167,18 @@ controller.hears(['claim'], 'direct_message,direct_mention', function (bot, mess
 
     bot.reply(message, "Let's claim a SN on your Meraki ORG...");
 
-//    Claim.fetchClaim(function (err, claim, text) {
-//        if (err) {
-//            bot.reply(message, "Sorry, could not contact Meraki ORG...");
-//            return;
-//        }
-//
-//        if (claim.length == 0) {
-//            bot.reply(message, text + "\n\nType next for more...");
-//            return;
-//        }
+    Claim.fetchClaim(function (err, claim, text) {
+        if (err) {
+            bot.reply(message, "Sorry, could not contact Meraki ORG...");
+            return;
+        }
 
-        //Lanzamos el Claim
+        if (claim.length == 0) {
+            bot.reply(message, text + "\n\nType next for more...");
+            return;
+        }
 
-        var request = require("request");
-
-        var options = { method: 'POST',
-          url: 'https://n57.meraki.com/api/v0/networks/N_595038100766367032/devices/claim',
-          headers: 
-           { 'Postman-Token': 'f12c1a69-cdec-408b-a28b-e6323eea8227',
-             'Cache-Control': 'no-cache',
-             'X-Cisco-Meraki-API-Key': '6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7',
-             'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
-          formData: { serial: 'Q2FD-TUKH-CR8V' } };
-        
-        request(options, function (error, response, body) {
-          if (error) {
-            throw new Error(error);
-            
-          }
-          console.log(body);
-          bot.reply(body);
-        });
+        bot.reply(body);
 
         // Store networks
         var toPersist = { "id": message.user, "claimed": claim };
@@ -206,7 +186,7 @@ controller.hears(['claim'], 'direct_message,direct_mention', function (bot, mess
             bot.reply(message, text + "\n\nType about [number] for more details");
         });
     });
-//});
+});
 
 //
 // Command: Remove
