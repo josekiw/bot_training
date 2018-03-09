@@ -21,9 +21,10 @@ module.exports.fetchClaim = function (cb) {
     request(options, function (error, response, body) {
       if (error) {
         throw new Error(error);
+        return claim_error;
+
       }
       console.log(body);
-      return claim_error;
 
     });
 
