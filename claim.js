@@ -41,7 +41,7 @@ module.exports.fetchClaim = function (cb) {
       }
 
       var nb = claim.length;
-      var response = claim.JSON.response;
+      var resp = claim.response;
       var msg = "**" + nb + " devices on your Meraki ORG:**";
       if (nb == "1") {
           msg = "Sorry, Device is **already claimed** and in API Test - Cliente1";
@@ -53,7 +53,7 @@ module.exports.fetchClaim = function (cb) {
           msg += current.errors;
       }
 
-      cb(null, claim, response + "\n\n" + body);
+      cb(null, claim, resp + "\n\n" + body);
       console.log(body);
       
     });
