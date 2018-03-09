@@ -25,7 +25,7 @@ module.exports.fetchClaim = function (cb) {
         bot.reply(message, "Error");
 
       }
-      console.log(body);
+      //console.log(body);
 
     });
 
