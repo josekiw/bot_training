@@ -39,17 +39,17 @@ var claim_result = JSON.parse(body);
           return;
       }
 
-      var nb = claim_result.length;
+      var nb = claim_result.errors;
       var msg = "**" + nb + " devices on your Meraki ORG:**";
-      if (nb == 1) {
-          msg = "**only one device is active now:**";
-      }
-      for (var i = 0; i < nb; i++) {
-          var current = claim_result[i];
+//      if (nb == 1) {
+//          msg = "**only one device is active now:**";
+//      }
+//      for (var i = 0; i < nb; i++) {
+//          var current = claim_result[i];
           //msg += "\n:small_blue_diamond: "
-          msg += "\n" + (i+1) + ". ";
-          msg += current.model + " - " + current.serial + " - " + current.mac;
-      }
+//          msg += "\n" + (i+1) + ". ";
+//          msg += current.model + " - " + current.serial + " - " + current.mac;
+//      }
 
 //      cb(null, claim_result, msg);
 cb(null, claim_result, body);
