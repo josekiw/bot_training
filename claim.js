@@ -31,6 +31,7 @@ module.exports.fetchClaim = function (cb) {
         }
 
       var claim = JSON.parse(body);
+      var claim_result = claim[errors];
       debug("fetched " + claim.length + " claimed");
       fine(JSON.stringify(claim));
 
@@ -51,9 +52,7 @@ module.exports.fetchClaim = function (cb) {
           msg += current.model + " - " + current.serial + " - " + current.mac;
       }
 
-      cb(null, claim, body);
-      cb(null, claim, err);
-      cb(null, claim, response);
+      cb(null, claim, claim_result);
       console.log(body);
       
     });
