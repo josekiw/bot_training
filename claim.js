@@ -42,7 +42,7 @@ module.exports.fetchClaim = function (cb) {
           msg = "Sorry, Device was **already claimed** at API Test - Cliente1";
       }
 
-      if (str == "") {
+      if (str == -1) {
         msg = "Device was **successfully** claimed at API Test - Cliente1";        
       }
 
