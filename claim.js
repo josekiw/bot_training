@@ -39,7 +39,7 @@ var claim_result = JSON.parse(body);
           return;
       }
 
-      var nb = claim_result.errors;
+      var nb = claim_result.length;
       var msg = "**" + nb + " devices on your Meraki ORG:**";
 //      if (nb == 1) {
 //          msg = "**only one device is active now:**";
