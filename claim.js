@@ -18,8 +18,8 @@ module.exports.fetchClaim = function (cb) {
       formData: { serial: 'Q2FD-TUKH-CR8V' } };
     
       request(options, function (err, response, body) {
-     if (error) {
-            debug("could not retreive list of devices, error: " + error);
+     if (err) {
+            debug("could not retreive list of devices, error: " + err);
             cb(new Error("Could not retreive current devices, sorry [Meraki API not responding]"), null, null);
             return;
         }
