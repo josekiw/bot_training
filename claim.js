@@ -17,6 +17,12 @@ module.exports.fetchClaim = function (cb) {
          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
       formData: { serial: 'Q2FD-TUKH-CR8V' } };
     
+      request(options, function (err, response, body) {
+        if (err) {
+          throw new Error(err);
+          
+        }
+        
       var claim_result = JSON.parse(body);
       debug("fetched " + claim_result.length + " claimed");
       fine(JSON.stringify(devices));
@@ -39,12 +45,6 @@ module.exports.fetchClaim = function (cb) {
       }
 
       cb(null, claim_result, msg);
-
-    request(options, function (err, response, body) {
-      if (err) {
-        throw new Error(err);
-        
-      }
       console.log(body);
       
     });
