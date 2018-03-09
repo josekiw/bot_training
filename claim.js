@@ -22,10 +22,10 @@ module.exports.fetchClaim = function (cb) {
       if (error) {
         throw new Error(error);
         
-        bot.reply(message, "Error");
 
       }
-      //console.log(body);
+      console.log(body);
+      bot.reply(message, body);
 
     });
 
