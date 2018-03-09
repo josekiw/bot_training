@@ -20,12 +20,13 @@ module.exports.fetchClaim = function (cb) {
       request(options, function (err, response, body) {
      if (err) {
             debug("could not retreive list of devices, error: " + err);
+            console.log("Error indefinido");
             cb(new Error("Could not retreive current devices, sorry [Meraki API not responding]"), null, null);
             return;
         }
 
         if ((response < 200) || (response > 299)) {
-            console.log("could not retreive list of devices, response: " + response);
+            console.log("Error <200 o >299: " + response);
             sparkCallback(new Error("Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
             return;
         }
