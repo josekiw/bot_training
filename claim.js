@@ -35,22 +35,17 @@ module.exports.fetchClaim = function (cb) {
       debug("fetched " + claim.length + " claimed");
       fine(JSON.stringify(claim));
 
-      if (claim.length == "0") {
-          cb(null, claim, "Sorry, Device is already claimed and in API Test - Cliente1");
-          return;
-      }
-
       var str = body;
       var already_claimed = str.search("already claimed");
       var msg;
       if (already_claimed != -1) {
           msg = "Sorry, Device was **already claimed** at API Test - Cliente1";
       }
-      for (var i = 0; i < str; i++) {
-          var current = claim[i];
-          //msg += "\n:small_blue_diamond: "
-          msg += "\n" + (i+1) + ". ";
-          msg += current.errors;
+
+      else {
+
+        msg = "Device was claimed **successfully** at API Test - Cliente1";        
+
       }
 
       cb(null, claim, msg);
