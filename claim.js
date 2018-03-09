@@ -30,28 +30,28 @@ module.exports.fetchClaim = function (cb) {
             return;
         }
 
-      var claim_result = JSON.parse(body);
-      debug("fetched " + claim_result.length + " claimed");
-      fine(JSON.stringify(claim_result));
+      var claim = JSON.parse(body);
+      debug("fetched " + claim.length + " claimed");
+      fine(JSON.stringify(claim));
 
-      if (claim_result.length == 0) {
-          cb(null, claim_result, "Sorry, no devices claimed on your Meraki ORG");
+      if (claim.length == 0) {
+          cb(null, claim, "Sorry, no devices claimed on your Meraki ORG");
           return;
       }
 
-      var nb = claim_result.length;
+      var nb = claim.length;
       var msg = "**" + nb + " devices on your Meraki ORG:**";
       if (nb == 1) {
           msg = "**only one device is active now:**";
       }
       for (var i = 0; i < nb; i++) {
-          var current = claim_result[i];
+          var current = claim[i];
           //msg += "\n:small_blue_diamond: "
           msg += "\n" + (i+1) + ". ";
           msg += current.model + " - " + current.serial + " - " + current.mac;
       }
 
-      cb(null, claim_result, body);
+      cb(null, claim, msg);
       console.log(body);
       
     });
