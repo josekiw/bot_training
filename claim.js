@@ -30,6 +30,12 @@ module.exports.fetchClaim = function (cb) {
         return;
     }
 
+    if (response == 403) {
+      console.log("403: could not retreive list of devices, response: " + response);
+      sparkCallback(new Error("403: Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
+      return;
+  }
+
 var claim_result = JSON.parse(body);
       debug("fetched " + claim_result.length + " claimed");
       fine(JSON.stringify(claim_result));
@@ -40,7 +46,7 @@ var claim_result = JSON.parse(body);
       }
 
       var nb = claim_result.length;
-      var claim_text = claim_result.msg;
+      var text = claim_result.msg;
       var msg = "**" + nb + " devices on your Meraki ORG:**";
       if (nb == 1) {
           msg = "**only one device is active now:**";
