@@ -167,21 +167,21 @@ controller.hears(['claim'], 'direct_message,direct_mention', function (bot, mess
 
     bot.reply(message, "Let's claim a SN on your Meraki ORG...");
 
-    Claim.fetchClaim(function (err, claim, text) {
+    Claim.fetchClaim(function (err, claim, msg) {
         if (err) {
             bot.reply(message, "Sorry, could not contact Meraki ORG...");
             return;
         }
 
         if (claim.length == 0) {
-            bot.reply(message, text + "\n\nType next for more...");
+            bot.reply(message, msg + "\n\nType next for more...");
             return;
         }
 
         // Store networks
         var toPersist = { "id": message.user, "claimed": claim };
         controller.storage.users.save(toPersist, function (err, id) {
-            bot.reply(message, text + "\n\nType about [number] for more details");
+            bot.reply(message, msg + "\n\nType about [number] for more details");
         });
     });
 });
