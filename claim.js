@@ -35,14 +35,14 @@ module.exports.fetchClaim = function (cb) {
       debug("fetched " + claim.length + " claimed");
       fine(JSON.stringify(claim));
 
-      if (claim.msg == "{“errors”:[“Device is already claimed and in API Test - Cliente1”]}") {
+      if (claim.length == "0") {
           cb(null, claim, "Sorry, Device is already claimed and in API Test - Cliente1");
           return;
       }
 
       var nb = claim.length;
       var msg = "**" + nb + " devices on your Meraki ORG:**";
-      if (nb == "undefined") {
+      if (nb == "1") {
           msg = "Sorry, Device is **already claimed** and in API Test - Cliente1";
       }
       for (var i = 0; i < nb; i++) {
@@ -52,7 +52,7 @@ module.exports.fetchClaim = function (cb) {
           msg += current.errors;
       }
 
-      cb(null, claim, msg + "\n\n" + body);
+      cb(null, claim, claim.msg + "\n\n" + body);
       console.log(body);
       
     });
