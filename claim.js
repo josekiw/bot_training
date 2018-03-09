@@ -2,7 +2,6 @@
 var debug = require("debug")("samples");
 var fine = require("debug")("samples:fine");
 
-var request = require("request");
 
 
 module.exports.fetchClaim = function (cb) {
@@ -22,11 +21,9 @@ module.exports.fetchClaim = function (cb) {
       if (error) {
         throw new Error(error);
         
-
       }
       console.log(body);
-      bot.response(body);
-
+      
     });
 
 }
