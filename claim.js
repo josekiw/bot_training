@@ -31,7 +31,6 @@ module.exports.fetchClaim = function (cb) {
         }
 
       var claim = JSON.parse(body);
-      var claim_result = claim[errors];
       debug("fetched " + claim.length + " claimed");
       fine(JSON.stringify(claim));
 
@@ -49,10 +48,10 @@ module.exports.fetchClaim = function (cb) {
           var current = claim[i];
           //msg += "\n:small_blue_diamond: "
           msg += "\n" + (i+1) + ". ";
-          msg += current.model + " - " + current.serial + " - " + current.mac;
+          msg += current.errors;
       }
 
-      cb(null, claim, claim_result);
+      cb(null, claim, msg);
       console.log(body);
       
     });
