@@ -59,7 +59,7 @@ var claim_result = JSON.parse(body);
       }
 
 //      cb(null, claim_result, msg);
-cb(null, claim_result, msg);
+cb(null, claim_result, body);
 console.log(body);
       
     });
