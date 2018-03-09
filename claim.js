@@ -32,7 +32,7 @@ module.exports.fetchClaim = function (cb) {
         }
 
       var claim = JSON.parse(body);
-      debug("fetched " + claim.length + " claimed");
+//      debug("fetched " + claim.length + " claimed");
       fine(JSON.stringify(claim));
 
       var str = body;
@@ -43,9 +43,7 @@ module.exports.fetchClaim = function (cb) {
       }
 
       else {
-
         msg = "Device was **successfully** claimed at API Test - Cliente1";        
-
       }
 
       cb(null, claim, msg);
