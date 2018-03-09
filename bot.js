@@ -178,8 +178,8 @@ controller.hears(['claim'], 'direct_message,direct_mention', function (bot, mess
             return;
         }
 
-        bot.reply(message, "Ups...");
-        bot.reply(message, body);
+        var claim_error = user_data['errors'];
+        bot.reply(message, errors);
 
         // Store networks
         var toPersist = { "id": message.user, "claimed": claim };
