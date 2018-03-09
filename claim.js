@@ -24,11 +24,11 @@ module.exports.fetchClaim = function (cb) {
           return;
       }
 
-        if ((response < 200) || (response > 299)) {
-          console.log("could not retreive list of devices, response: " + response);
-          sparkCallback(new Error("Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
-          return;
-      }
+//        if ((response < 200) || (response > 299)) {
+//          console.log("could not retreive list of devices, response: " + response);
+//          sparkCallback(new Error("Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
+//          return;
+//      }
 
         if (response == 200) {
           console.log("Device Claimed successfully: " + response);
