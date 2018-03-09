@@ -21,7 +21,8 @@ module.exports.fetchClaim = function (cb) {
     request(options, function (error, response, body) {
       if (error) {
         throw new Error(error);
-        bot.say('Hola, ha habido un error...');
+        
+        bot.reply(message, "Error");
 
       }
       console.log(body);
