@@ -38,7 +38,7 @@ module.exports.fetchClaim = function (cb) {
       var str = body;
       var already_claimed = str.search("already claimed");
       var msg;
-      if (already_claimed != -1) {
+      if (already_claimed = -1) {
           msg = "Sorry, Device was **already claimed** at API Test - Cliente1";
       }
 
