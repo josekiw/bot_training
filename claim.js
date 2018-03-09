@@ -18,12 +18,12 @@ module.exports.fetchClaim = function (cb) {
       formData: { serial: 'Q2FD-TUKH-CR8V' } };
     
       request(options, function (err, response, body) {
-     if (err) {
-            debug("could not retreive list of devices, error: " + err);
-            console.log("Error indefinido");
-            cb(new Error("Could not retreive current devices, sorry [Meraki API not responding]"), null, null);
-            return;
-        }
+ //    if (err) {
+ //           debug("could not retreive list of devices, error: " + err);
+ //           console.log(err);
+//            cb(new Error("Could not retreive current devices, sorry [Meraki API not responding]"), null, null);
+//            return;
+//        }
 
         if ((response < 200) || (response > 299)) {
             console.log("Error <200 o >299: " + response);
@@ -38,7 +38,7 @@ module.exports.fetchClaim = function (cb) {
       var str = body;
       var already_claimed = str.search("already claimed");
       var msg;
-      if (already_claimed = -1) {
+      if (already_claimed != -1) {
           msg = "Sorry, Device was **already claimed** at API Test - Cliente1";
       }
 
