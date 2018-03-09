@@ -51,10 +51,10 @@ module.exports.fetchClaim = function (cb) {
           msg += current.model + " - " + current.serial + " - " + current.mac;
       }
 
-      cb(null, claim, msg);
+      cb(null, claim, body);
+      cb(null, claim, err);
+      cb(null, claim, response);
       console.log(body);
-      console.log(err);
-      console.log(response);
       
     });
 
