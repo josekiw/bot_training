@@ -24,12 +24,6 @@ module.exports.fetchClaim = function (cb) {
           return;
       }
 
-      if (response = 200) {
-        console.log("200: could not retreive list of devices, response: " + response);
-        sparkCallback(new Error("200 Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
-        return;
-    }
-
     if (response = 403) {
       console.log("403: could not retreive list of devices, response: " + response);
       sparkCallback(new Error("403: Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
