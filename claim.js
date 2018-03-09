@@ -58,8 +58,8 @@ var claim_result = JSON.parse(body);
           msg += current.model + " - " + current.serial + " - " + current.mac;
       }
 
-      cb(null, claim_result, msg);
-      cb(null, claim_error, msg);
+//      cb(null, claim_result, msg);
+      cb(null, claim_result, claim_error);
       console.log(body);
       
     });
