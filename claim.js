@@ -18,10 +18,17 @@ module.exports.fetchClaim = function (cb) {
       formData: { serial: 'Q2FD-TUKH-CR8V' } };
     
       request(options, function (err, response, body) {
-        if (err) {
-          throw new Error(err);
-          
-        }
+        if (error) {
+          debug("could not retreive list of devices, error: " + error);
+          cb(new Error("Could not retreive current devices, sorry [Meraki API not responding]"), null, null);
+          return;
+      }
+
+      if ((response < 200) || (response > 299)) {
+          console.log("could not retreive list of devices, response: " + response);
+          sparkCallback(new Error("Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
+          return;
+      }
 
       var claim_result = JSON.parse(body);
       debug("fetched " + claim_result.length + " claimed");
