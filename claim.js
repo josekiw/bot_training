@@ -17,19 +17,19 @@ module.exports.fetchClaim = function (cb) {
          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
       formData: { serial: 'Q2FD-TUKH-CR8V' } };
     
-      request(options, function (err, body) {
- //    if (err) {
- //           debug("could not retreive list of devices, error: " + err);
- //           console.log(err);
-//            cb(new Error("Could not retreive current devices, sorry [Meraki API not responding]"), null, null);
-//            return;
-//        }
+      request(options, function (err, response, body) {
+     if (err) {
+            debug("could not retreive list of devices, error: " + err);
+            console.log("Error indefinido");
+            cb(new Error("Could not retreive current devices, sorry [Meraki API not responding]"), null, null);
+            return;
+        }
 
-//        if ((response < 200) || (response > 299)) {
-//            console.log("Error <200 o >299: " + response);
-//            sparkCallback(new Error("Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
-//            return;
-//        }
+        if ((response < 200) || (response > 299)) {
+            console.log("Error <200 o >299: " + response);
+            sparkCallback(new Error("Could not retreive current devices, sorry [bad anwser from Meraki API]"), null, null);
+            return;
+        }
 
       var claim = JSON.parse(body);
       debug("fetched " + claim.length + " claimed");
@@ -44,7 +44,7 @@ module.exports.fetchClaim = function (cb) {
 
       else {
 
-        msg = "Device was claimed **successfully** at API Test - Cliente1";        
+        msg = "Device was **successfully** claimed at API Test - Cliente1";        
 
       }
 
