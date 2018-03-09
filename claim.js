@@ -34,8 +34,8 @@ module.exports.fetchClaim = function (cb) {
       debug("fetched " + claim.length + " claimed");
       fine(JSON.stringify(claim));
 
-      if (claim.length == 0) {
-          cb(null, claim, "Sorry, no devices claimed on your Meraki ORG");
+      if (claim.msg == "{“errors”:[“Device is already claimed and in API Test - Cliente1”]}") {
+          cb(null, claim, "Sorry, Device is already claimed and in API Test - Cliente1");
           return;
       }
 
