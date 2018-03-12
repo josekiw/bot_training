@@ -14,7 +14,7 @@ module.exports.fetchRemove = function (cb) {
       headers: 
        { 'Postman-Token': 'f12c1a69-cdec-408b-a28b-e6323eea8227',
          'Cache-Control': 'no-cache',
-         'X-Cisco-Meraki-API-Key': '6eaf1088e0eb283b13fb142b3f2be843dfe2b0b7'}
+         'X-Cisco-Meraki-API-Key': 'd705d20bae5d6f4d0fff0d7f50452d8eb2c3213e'}
     };
     
     request(options, function (error, response, body) {
