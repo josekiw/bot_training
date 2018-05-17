@@ -12,7 +12,7 @@ module.exports.fetchDevices = function (cb) {
         method: 'GET',
         url: "https://dashboard.meraki.com/api/v0/networks/N_595038100766367032/devices",
         headers: {
-            "X-Cisco-Meraki-API-Key": "84566be5bc189eb8dd020fefb6dbd0c68fcd7616",
+            "X-Cisco-Meraki-API-Key": "d705d20bae5d6f4d0fff0d7f50452d8eb2c3213e",
             "content-type": "application/json"
         }
     };
