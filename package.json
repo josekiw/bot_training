@@ -5,7 +5,7 @@
   "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env SPARK_TOKEN=NmJiOTNjMTYtZmY3ZC00MzFmLTk0ZjAtYWNiZGExYzdhZTk2NTZmYzRmNjItZDkz PUBLIC_URL=https://kiwbot.herokuapp.com SECRET=empty node bot.js"
+    "start": "cross-env SPARK_TOKEN=NmJiOTNjMTYtZmY3ZC00MzFmLTk0ZjAtYWNiZGExYzdhZTk2NTZmYzRmNjItZDkz PUBLIC_URL=https://meraki-bot.herokuapp.com SECRET=empty node bot.js"
 
   },
   "keywords": [
